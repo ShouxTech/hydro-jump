@@ -45,7 +45,7 @@ const GameController = Knit.CreateController({
     },
 
     KnitInit() {
-        ContextActionService.BindAction('FloatyJump', (actionName, state, inputObject) => {
+        ContextActionService.BindActionAtPriority('FloatyJump', (actionName, state, inputObject) => {
             if (!gameOn || jumpDebounce) return;
 
             if (state === Enum.UserInputState.Begin) {
@@ -58,7 +58,7 @@ const GameController = Knit.CreateController({
                 task.wait(0.1);
                 jumpDebounce = false;
             }
-        }, false, Enum.KeyCode.Space);
+        }, false, Enum.ContextActionPriority.High.Value, Enum.KeyCode.Space);
 
         ContextActionService.BindAction('FloatyLeft', (actionName, state, inputObject) => {
             if (!gameOn) return;
